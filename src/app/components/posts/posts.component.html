@@ -1,0 +1,5 @@
+<div class="posts">
+  @for (post of posts$ | async; track post.id) {
+    <post-card [post]="post"></post-card>
+  }
+</div>

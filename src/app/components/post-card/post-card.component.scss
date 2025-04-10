@@ -1,0 +1,15 @@
+.post-card{
+  border: black solid 1px;
+  border-radius: 5px;
+  box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.3);
+  margin: 20px;
+  padding: 10px;
+  max-width: 600px;
+  height: 200px;
+
+  .body{
+    height: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
