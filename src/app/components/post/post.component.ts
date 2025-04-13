@@ -11,6 +11,7 @@ import {AsyncPipe} from '@angular/common';
   imports: [
     AsyncPipe
   ],
+  standalone: true,
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss'
 })

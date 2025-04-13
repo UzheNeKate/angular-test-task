@@ -11,6 +11,7 @@ import {PostCardComponent} from '../post-card/post-card.component';
     AsyncPipe,
     PostCardComponent
   ],
+  standalone: true,
   templateUrl: './posts.component.html',
   styleUrl: './posts.component.scss'
 })
@@ -25,6 +26,5 @@ export class PostsComponent implements OnInit {
 
   ngOnInit(): void {
     this.posts$ = this.postsService.getAll();
-    console.log(this.posts$);
   }
 }

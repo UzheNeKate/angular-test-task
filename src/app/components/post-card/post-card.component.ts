@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 @Component({
   selector: 'post-card',
   imports: [],
+  standalone: true,
   templateUrl: './post-card.component.html',
   styleUrl: './post-card.component.scss'
 })
