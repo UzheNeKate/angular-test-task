@@ -5,17 +5,18 @@ import { Injectable } from '@angular/core';
 })
 export class TokenService {
   static tokenKey = 'token';
+
   constructor() { }
 
-  static saveToken(token: string) {
+  static saveToken(token: string): void {
     localStorage.setItem(this.tokenKey, token);
   }
 
-  static getToken() {
-    return this.tokenKey;
+  static getToken(): string {
+    return localStorage.getItem(this.tokenKey) ?? '';
   }
 
-  static removeToken() {
+  static removeToken(): void {
     localStorage.removeItem(this.tokenKey);
   }
 }
