@@ -8,15 +8,15 @@ export class TokenService {
 
   constructor() { }
 
-  static saveToken(token: string): void {
+  saveToken(token: string): void {
     localStorage.setItem(this.tokenKey, token);
   }
 
-  static getToken(): string {
+  getToken(): string {
     return localStorage.getItem(this.tokenKey) ?? '';
   }
 
-  static removeToken(): void {
+  removeToken(): void {
     localStorage.removeItem(this.tokenKey);
   }
 }
