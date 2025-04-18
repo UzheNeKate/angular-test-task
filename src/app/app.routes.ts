@@ -1,9 +1,12 @@
 import { Routes } from '@angular/router';
-import {PostsComponent} from './components/posts/posts.component';
-import {PostComponent} from './components/post/post.component';
+import {postsRoutes} from "./pages/posts/posts.routes";
+import {HomeComponent} from "./pages/home/home/home.component";
 
 export const routes: Routes = [
-  { path: 'posts', component: PostsComponent },
-  { path: "posts/:id", component: PostComponent },
-  { path: '', redirectTo: 'posts', pathMatch: 'full' },
+  {
+    path: 'posts',
+    loadChildren: () =>
+        import('./pages/posts/posts.routes').then(m => m.postsRoutes) },
+  { path: 'home', component: HomeComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];

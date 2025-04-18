@@ -7,7 +7,7 @@ import {User} from '../models/user';
 })
 export class UserStoreService {
 
-  user$: Observable<User> = null;
+  //user$: Observable<User> = null;
   user = signal<User | null>(null);
 
   constructor() { }

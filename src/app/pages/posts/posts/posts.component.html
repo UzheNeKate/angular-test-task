@@ -1,0 +1,23 @@
+<input type="text" [formControl]="searchControl" placeholder="Search...">
+@if(isLoading){
+  <div>Loading...</div>
+}
+@if(posts.length){
+  <div class="posts">
+    @for (post of posts; track post.id) {
+      <post-card [post]="post"></post-card>
+    }
+  </div>
+}
+@else{
+  <p>There is no data for your request</p>
+}
+<div class="pagination">
+  @if (currentPage() > 1){
+    <button (click)="getPreviousPage()">Prev</button>
+  }
+  <a class="page-number">Page: {{currentPage()}}</a>
+  @if (posts.length == pageSize){
+    <button (click)="getNextPage()">Next</button>
+  }
+</div>

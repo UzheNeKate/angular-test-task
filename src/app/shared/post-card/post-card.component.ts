@@ -1,6 +1,6 @@
-import {Component, input, Input} from '@angular/core';
-import {Post} from '../../models/post.model';
+import {Component, input} from '@angular/core';
 import {Router} from '@angular/router';
+import {Post} from '../../models/post.model';
 
 @Component({
   selector: 'post-card',

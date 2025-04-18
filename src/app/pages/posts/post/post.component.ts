@@ -1,16 +1,13 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Post} from '../../models/post.model';
-import {PostsService} from '../../services/posts.service';
-import {Comment} from '../../models/comment.model';
-import {CommentsService} from '../../services/comments.service';
-import {AsyncPipe} from '@angular/common';
+import {Post} from '../../../models/post.model';
+import {PostsService} from '../../../core/api/posts.service';
+import {Comment} from '../../../models/comment.model';
+import {CommentsService} from '../../../core/api/comments.service';
 
 @Component({
   selector: 'app-post',
-  imports: [
-    AsyncPipe
-  ],
+  imports: [],
   standalone: true,
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss'
@@ -29,6 +26,4 @@ export class PostComponent implements OnInit {
     this.postsService.getById(id).subscribe(post => { this.post = post; });
     this.commentsService.getAllForPost(id).subscribe(comments => { this.comments = comments });
   }
-
-
 }

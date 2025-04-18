@@ -1,5 +1,10 @@
-.main{
-  .header{
-
+.content {
+  header {
+    .menu {
+      display: flex;
+      gap: 1rem;
+      list-style: none;
+      padding: 0;
+    }
   }
 }

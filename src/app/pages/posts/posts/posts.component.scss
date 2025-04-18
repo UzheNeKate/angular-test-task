@@ -1,0 +1,18 @@
+.posts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .page-number {
+    align-content: center;
+  }
+
+  button {
+    margin: 10px;
+  }
+}

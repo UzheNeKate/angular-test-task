@@ -1,5 +1,5 @@
 import {inject, Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Post} from '../../models/post.model';
 
@@ -14,10 +14,18 @@ export class PostsService {
   constructor() { }
 
   getAll(): Observable<Post[]>{
-    return this.httpClient.get<Post[]>(this.baseUrl)
+    return this.httpClient.get<Post[]>(this.baseUrl);
   }
 
   getById(id: number): Observable<Post> {
-    return this.httpClient.get<Post>(`${this.baseUrl}/${id}`)
+    return this.httpClient.get<Post>(`${this.baseUrl}/${id}`);
+  }
+
+  getPaginated(limit: number, page: number = 0): Observable<Post[]> {
+    let params = new HttpParams()
+      .set('_limit', limit)
+      .set('_start', page);
+
+    return this.httpClient.get<Post[]>(`${this.baseUrl}`, { params });
   }
 }
