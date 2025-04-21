@@ -17,8 +17,8 @@ export class AuthService {
 
   constructor() { }
 
-  login(): Subscription {
-    return this.httpClient.get<User>(`${this.baseUrl}/1`)
+  login(): void {
+    this.httpClient.get<User>(`${this.baseUrl}/1`)
       .subscribe(user => {
         this.userStore.user.set(user);
         this.tokenService.saveToken(this.generateRandomString());

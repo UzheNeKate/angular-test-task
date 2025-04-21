@@ -1,10 +1,31 @@
 .content {
   header {
-    .menu {
-      display: flex;
-      gap: 1rem;
-      list-style: none;
-      padding: 0;
+    display: flex;
+    justify-content: space-between;
+
+    .left-side {
+      width: fit-content;
+
+      nav {
+        width: fit-content;
+
+        .menu {
+          display: flex;
+          gap: 1rem;
+          list-style: none;
+          padding: 0;
+          width: fit-content;
+        }
+      }
+    }
+
+    .right-side{
+      width: fit-content;
+
+      button{
+        height: fit-content;
+        align-self: center;
+      }
     }
   }
 }

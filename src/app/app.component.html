@@ -3,11 +3,15 @@
         <div class="left-side">
             <nav>
                 <ul class="menu">
-                    <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
-                    <li><a routerLink="/posts" routerLinkActive="active">Posts</a></li>
+                    <li><a routerLink="/home" routerLinkActive="active">{{ 'Home' | translate }}</a></li>
+                    <li><a routerLink="/posts" routerLinkActive="active">{{ 'Posts' | translate }}</a></li>
                 </ul>
             </nav>
         </div>
+      <div class="right-side">
+        <button (click)="switchLanguage()">{{'SwitchLang' | translate }}</button>
+        <button (click)="login()">{{'Login' | translate }}</button>
+      </div>
     </header>
 </div>
 
