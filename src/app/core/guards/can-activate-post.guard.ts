@@ -5,5 +5,5 @@ import {inject} from '@angular/core';
 export const canActivatePostGuard: CanActivateFn = (route, state) => {
   let userStore = inject(UserStoreService);
 
-  return userStore.user() !== null;
+  return userStore.user() != null;
 };

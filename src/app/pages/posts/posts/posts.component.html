@@ -4,7 +4,7 @@
 }
 @if(posts.length){
   <div class="posts">
-    @for (post of posts; track post.id) {
+    @for (post of searchResults; track post.id) {
       <post-card [post]="post"></post-card>
     }
   </div>

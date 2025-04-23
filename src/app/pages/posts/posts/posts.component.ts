@@ -1,9 +1,9 @@
-import {Component, effect, inject, OnInit, signal} from '@angular/core';
+import {Component, effect, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {PostsService} from '../../../core/api/posts.service';
-import {Post} from '../../../models/post.model';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
-import {debounceTime, distinctUntilChanged, filter, of, switchMap, takeUntil} from 'rxjs';
+import {debounceTime, distinctUntilChanged, filter, Observable, of, Subject, switchMap, takeUntil} from 'rxjs';
 import {PostCardComponent} from '../../../shared/post-card/post-card.component';
+import {Post} from '../../../core/models/post.model';
 
 @Component({
   selector: 'posts',
@@ -15,9 +15,10 @@ import {PostCardComponent} from '../../../shared/post-card/post-card.component';
   templateUrl: './posts.component.html',
   styleUrl: './posts.component.scss'
 })
-export class PostsComponent implements OnInit {
+export class PostsComponent implements OnInit, OnDestroy {
   searchControl = new FormControl('');
 
+  private destroy$ = new Subject<void>();
   private postsService: PostsService;
 
   public pageSize: number = 9;
@@ -31,6 +32,7 @@ export class PostsComponent implements OnInit {
 
     effect(() => {
       this.loadPosts();
+      this.setupSearch();
     });
   }
 
@@ -50,31 +52,43 @@ export class PostsComponent implements OnInit {
     let currentPage = this.currentPage();
 
     this.postsService.getPaginated(this.pageSize, this.pageSize * (currentPage - 1))
-      .subscribe( posts => {
+      .subscribe(posts => {
         this.posts = posts;
-    });
+        this.searchResults = posts;
+      });
   }
 
   private setupSearch(): void {
-    this.searchControl.valueChanges.pipe(
-      debounceTime(300),
-      distinctUntilChanged(),
-      filter(term => term != null && (term.length >= 2 || term.length === 0)),
+    this.searchControl.valueChanges
+      .pipe(
+        debounceTime(300),
+        distinctUntilChanged(),
+        filter(term => term != null && (term.length >= 2 || term.length === 0)),
+        switchMap(term => this.searchLocalData(term ?? '')),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(results => {
+        this.searchResults = results;
+      });
+  }
 
-      // Handle subscription cleanup
-      //takeUntil(this.destroy$),
+  private searchLocalData(term: string): Observable<any[]> {
+    if (!term.trim()) {
+      return of(this.posts || []);
+    }
 
-      // Switch to new search observable, canceling previous in-flight requests
-      switchMap(term => {
-        if (term == null || term.length === 0) {
-          return [];
-        }
+    term = term.toLowerCase();
 
-        return this.posts.filter(post => post.title.toLowerCase().indexOf(term.toLowerCase()) !== -1);
-      })
-    ).subscribe(results => {
-      //this.searchResults = results;
-      this.isLoading = false;
-    });
+    const results = this.posts.filter(item =>
+      item.title.toLowerCase().includes(term) ||
+      (item.body && item.body.toLowerCase().includes(term))
+    );
+
+    return of(results);
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

@@ -3,10 +3,11 @@ import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {PostsService} from './core/api/posts.service';
 import {AuthService} from './core/api/auth.service';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
+import {IfUserExistsDirective} from './core/directives/if-user-exists.directive';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterLink, RouterLinkActive, RouterOutlet, TranslatePipe],
+  imports: [RouterLink, RouterLinkActive, RouterOutlet, TranslatePipe, IfUserExistsDirective],
   standalone: true,
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
@@ -28,5 +29,9 @@ export class AppComponent {
 
   login(): void {
     this.authService.login();
+  }
+
+  logout(): void {
+    this.authService.logout();
   }
 }

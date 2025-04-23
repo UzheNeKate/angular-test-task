@@ -25,7 +25,12 @@ export class AuthService {
       });
   }
 
-  generateRandomString(length: number = 15): string {
+  logout(): void {
+    this.userStore.user.set(undefined);
+    this.tokenService.removeToken();
+  }
+
+  private generateRandomString(length: number = 15): string {
     return Math.random().toString(20).substring(2, length);
   }
 }

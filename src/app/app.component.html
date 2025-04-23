@@ -11,6 +11,9 @@
       <div class="right-side">
         <button (click)="switchLanguage()">{{'SwitchLang' | translate }}</button>
         <button (click)="login()">{{'Login' | translate }}</button>
+          <div *ifUserExists>
+              <button (click)="logout()">{{'Logout' | translate }}</button>
+          </div>
       </div>
     </header>
 </div>

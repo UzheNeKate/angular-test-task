@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Post} from '../../../models/post.model';
 import {PostsService} from '../../../core/api/posts.service';
-import {Comment} from '../../../models/comment.model';
 import {CommentsService} from '../../../core/api/comments.service';
+import {Post} from '../../../core/models/post.model';
+import {Comment} from '../../../core/models/comment.model';
 
 @Component({
   selector: 'app-post',

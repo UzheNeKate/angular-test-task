@@ -1,9 +1,9 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {PostsService} from '../../../core/api/posts.service';
 import {Observable} from 'rxjs';
-import {Post} from '../../../models/post.model';
 import {AsyncPipe} from '@angular/common';
 import {PostCardComponent} from '../../../shared/post-card/post-card.component';
+import {Post} from '../../../core/models/post.model';
 
 @Component({
   selector: 'app-home',

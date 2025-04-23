@@ -5,7 +5,7 @@
   <div class="comments">
     @for (comment of comments; track comment.id){
       <h3>{{comment.name}}:</h3>
-      <p>Author: {{comment.name}}</p>
+      <p>Author: {{comment.email}}</p>
       <p>{{comment.body}}</p>
     }
   </div>
